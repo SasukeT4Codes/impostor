@@ -1,0 +1,231 @@
+[gd_scene load_steps=20 format=3 uid="uid://cxjod6fhqv3yp"]
+
+[ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_pbbho"]
+[ext_resource type="FontFile" uid="uid://deh26sxetdow1" path="res://src/assets/fonts/MotionControl-Title.otf" id="2_pbbho"]
+[ext_resource type="Texture2D" uid="uid://blt54qryonjkw" path="res://src/resources/Atlas/Menu.tres" id="3_nh26k"]
+[ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="4_5qchd"]
+[ext_resource type="Texture2D" uid="uid://cnyqx8kkiq3tj" path="res://src/assets/ui/BotonNormal.png" id="5_4nqo0"]
+[ext_resource type="Texture2D" uid="uid://cleqi5c2xdlo2" path="res://src/assets/ui/BotonPressed.png" id="6_ptnfq"]
+[ext_resource type="Texture2D" uid="uid://b0bhshgitawwe" path="res://src/assets/ui/BotonHover.png" id="7_6pn3m"]
+[ext_resource type="Texture2D" uid="uid://mbexp1exudu6" path="res://src/assets/ui/BotonHoverPressed.png" id="8_28222"]
+[ext_resource type="Texture2D" uid="uid://dyp6he657lj1b" path="res://src/assets/ui/BotonFocus.png" id="9_ajlxs"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4nqo0"]
+content_margin_bottom = 32.0
+texture = ExtResource("5_4nqo0")
+region_rect = Rect2(0, 0, 56, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijqjh"]
+content_margin_top = 28.0
+texture = ExtResource("6_ptnfq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x17ry"]
+content_margin_bottom = 32.0
+texture = ExtResource("7_6pn3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijy02"]
+content_margin_top = 28.0
+texture = ExtResource("8_28222")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dx4i"]
+texture = ExtResource("9_ajlxs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ulllg"]
+content_margin_bottom = 32.0
+texture = ExtResource("5_4nqo0")
+region_rect = Rect2(0, 0, 56, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ptnfq"]
+content_margin_top = 28.0
+texture = ExtResource("6_ptnfq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6pn3m"]
+content_margin_bottom = 32.0
+texture = ExtResource("7_6pn3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_28222"]
+content_margin_top = 28.0
+texture = ExtResource("8_28222")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ajlxs"]
+texture = ExtResource("9_ajlxs")
+
+[node name="MenuPrincipal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96862745, 0.6156863, 0.39607844, 1)
+
+[node name="MenuVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -533.0
+offset_right = 350.0
+offset_bottom = 533.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Titulo" type="NinePatchRect" parent="MenuVBox"]
+custom_minimum_size = Vector2(140, 175)
+layout_mode = 2
+texture = ExtResource("1_pbbho")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Label" type="Label" parent="MenuVBox/Titulo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("2_pbbho")
+theme_override_font_sizes/font_size = 128
+text = "EL IMPOSTOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Botones" type="NinePatchRect" parent="MenuVBox"]
+custom_minimum_size = Vector2(0, 875)
+layout_mode = 2
+texture = ExtResource("3_nh26k")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="BotonesVBox" type="VBoxContainer" parent="MenuVBox/Botones"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Jugar" type="Button" parent="MenuVBox/Botones/BotonesVBox"]
+custom_minimum_size = Vector2(560, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("4_5qchd")
+theme_override_font_sizes/font_size = 96
+theme_override_styles/normal = SubResource("StyleBoxTexture_4nqo0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ijqjh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x17ry")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ijy02")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4dx4i")
+text = "JUGAR"
+
+[node name="Opciones" type="Button" parent="MenuVBox/Botones/BotonesVBox"]
+custom_minimum_size = Vector2(560, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("4_5qchd")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_ulllg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ptnfq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6pn3m")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_28222")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ajlxs")
+text = "Opciones"
+
+[node name="Historial" type="Button" parent="MenuVBox/Botones/BotonesVBox"]
+custom_minimum_size = Vector2(560, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("4_5qchd")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_ulllg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ptnfq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6pn3m")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_28222")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ajlxs")
+text = "Historial"
+
+[node name="Tutorial" type="Button" parent="MenuVBox/Botones/BotonesVBox"]
+custom_minimum_size = Vector2(560, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("4_5qchd")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_ulllg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ptnfq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6pn3m")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_28222")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ajlxs")
+text = "Tutorial"
+
+[node name="Salir" type="Button" parent="MenuVBox/Botones/BotonesVBox"]
+custom_minimum_size = Vector2(560, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("4_5qchd")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_ulllg")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ptnfq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6pn3m")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_28222")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ajlxs")
+text = "Salir"

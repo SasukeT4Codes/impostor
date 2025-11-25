@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://blt54qryonjkw"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lwivs"]
+load_path = "res://.godot/imported/PastelUIFree.png-b3bd2dd82e9b49afd50d22846a6b423f.ctex"
+
+[resource]
+atlas = SubResource("CompressedTexture2D_lwivs")
+region = Rect2(160, 240, 128, 96)
