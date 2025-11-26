@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://src/scripts/GameData.gd"
+Musica="*res://src/scripts/Musica.gd"
 
 [display]
 

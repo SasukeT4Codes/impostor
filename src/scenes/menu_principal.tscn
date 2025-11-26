@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://cxjod6fhqv3yp"]
+[gd_scene load_steps=21 format=3 uid="uid://cxjod6fhqv3yp"]
 
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_pbbho"]
+[ext_resource type="Script" uid="uid://cri0t13cxc3m8" path="res://src/scripts/MenuPrincipal.gd" id="1_ptnfq"]
 [ext_resource type="FontFile" uid="uid://deh26sxetdow1" path="res://src/assets/fonts/MotionControl-Title.otf" id="2_pbbho"]
 [ext_resource type="Texture2D" uid="uid://blt54qryonjkw" path="res://src/resources/Atlas/Menu.tres" id="3_nh26k"]
 [ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="4_5qchd"]
@@ -57,6 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ptnfq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
