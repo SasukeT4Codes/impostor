@@ -1,22 +1,16 @@
-[gd_scene load_steps=26 format=3 uid="uid://beabylmykptfi"]
+[gd_scene load_steps=20 format=3 uid="uid://beabylmykptfi"]
 
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_7ok1f"]
-[ext_resource type="Script" uid="uid://cgf0cd860kd3i" path="res://src/scripts/preparar_partida.gd" id="1_485t4"]
+[ext_resource type="Script" uid="uid://cgf0cd860kd3i" path="res://src/scripts/PrepararPartida.gd" id="1_485t4"]
 [ext_resource type="FontFile" uid="uid://deh26sxetdow1" path="res://src/assets/fonts/MotionControl-Title.otf" id="2_gt3rl"]
 [ext_resource type="Texture2D" uid="uid://blt54qryonjkw" path="res://src/resources/Atlas/Menu.tres" id="3_uy0ma"]
 [ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="4_nwdqu"]
 [ext_resource type="Texture2D" uid="uid://cnyqx8kkiq3tj" path="res://src/assets/ui/BotonNormal.png" id="5_taqak"]
-[ext_resource type="Texture2D" uid="uid://dcov2e4mc5du4" path="res://src/assets/characters/char-01.png" id="5_tbua8"]
-[ext_resource type="Texture2D" uid="uid://bd4yc0o5xl72r" path="res://src/assets/characters/char-02.png" id="6_485t4"]
 [ext_resource type="Texture2D" uid="uid://cleqi5c2xdlo2" path="res://src/assets/ui/BotonPressed.png" id="6_p0ppv"]
+[ext_resource type="PackedScene" uid="uid://c83dm7uewlthw" path="res://src/scenes/jugador.tscn" id="6_uy0ma"]
 [ext_resource type="Texture2D" uid="uid://b0bhshgitawwe" path="res://src/assets/ui/BotonHover.png" id="7_b70hs"]
-[ext_resource type="Texture2D" uid="uid://d0fdfu8nh4wyf" path="res://src/assets/characters/char-03.png" id="7_xt27n"]
 [ext_resource type="Texture2D" uid="uid://mbexp1exudu6" path="res://src/assets/ui/BotonHoverPressed.png" id="8_tbua8"]
-[ext_resource type="Texture2D" uid="uid://qqgv2rrjwyya" path="res://src/assets/characters/char-04.png" id="8_y4ii5"]
 [ext_resource type="Texture2D" uid="uid://dyp6he657lj1b" path="res://src/assets/ui/BotonFocus.png" id="9_485t4"]
-[ext_resource type="Texture2D" uid="uid://n2xb6y1uspce" path="res://src/assets/characters/char-05.png" id="9_ushmb"]
-[ext_resource type="Texture2D" uid="uid://0hc1kqgm22b" path="res://src/assets/characters/char-06.png" id="10_qj7r5"]
-[ext_resource type="Texture2D" uid="uid://diu2njmtd1p6a" path="res://src/assets/characters/char-07.png" id="11_7ocu1"]
 
 [sub_resource type="Theme" id="Theme_xt27n"]
 default_font = ExtResource("4_nwdqu")
@@ -188,34 +182,8 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 alignment = 1
 
-[node name="JugadorX" type="HBoxContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox"]
+[node name="Jugador" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox" instance=ExtResource("6_uy0ma")]
 layout_mode = 2
-size_flags_horizontal = 4
-alignment = 1
-
-[node name="TextureButton" type="TextureButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox/JugadorX"]
-layout_mode = 2
-texture_normal = ExtResource("5_tbua8")
-
-[node name="LineEdit" type="LineEdit" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox/JugadorX"]
-custom_minimum_size = Vector2(600, 128)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_nwdqu")
-theme_override_font_sizes/font_size = 64
-placeholder_text = "Jugador 1"
-
-[node name="PefilX" type="ItemList" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-item_count = 7
-max_columns = 5
-item_0/icon = ExtResource("5_tbua8")
-item_1/icon = ExtResource("6_485t4")
-item_2/icon = ExtResource("7_xt27n")
-item_3/icon = ExtResource("8_y4ii5")
-item_4/icon = ExtResource("9_ushmb")
-item_5/icon = ExtResource("10_qj7r5")
-item_6/icon = ExtResource("11_7ocu1")
 
 [node name="Continuar" type="Button" parent="MenuVBox/Menu/ContenedorVBox"]
 custom_minimum_size = Vector2(560, 170)
