@@ -8,6 +8,7 @@ func _ready():
 	perfil_list.visible = false
 	avatar_btn.pressed.connect(_on_avatar_pressed)
 	perfil_list.item_selected.connect(_on_perfil_selected)
+	nombre_edit.text_changed.connect(_on_nombre_changed)
 
 	# Cargar íconos automáticamente desde assets
 	for i in range(1, 8):
@@ -23,10 +24,17 @@ func _on_perfil_selected(index: int):
 	var icon: Texture = perfil_list.get_item_icon(index)
 	if icon:
 		avatar_btn.texture_normal = icon
+		# Guardar inmediatamente en jugadores_actual
+		GameData.guardar_jugador_actual(get_index(), nombre_edit.text, icon)
 	perfil_list.visible = false
 
+func _on_nombre_changed(new_text: String):
+	if new_text.strip_edges() != "":
+		GameData.guardar_jugador_actual(get_index(), new_text, avatar_btn.texture_normal)
+
 func set_default_name(id: int):
-	nombre_edit.text = "Jugador%d" % (id + 1)
+	# Usar placeholder en vez de texto real
+	nombre_edit.placeholder_text = "Jugador%d" % (id + 1)
 
 func get_data() -> Dictionary:
 	return {

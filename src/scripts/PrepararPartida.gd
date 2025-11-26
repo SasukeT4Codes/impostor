@@ -37,12 +37,25 @@ func _actualizar_impostores(jugadores:int):
 	cant_imp.select(0)
 
 func _generar_jugadores(cantidad:int):
-	# Limpiar lista previa
+	# 1. Guardar lo que ya hay en pantalla en GameData antes de borrar
+	GameData.reset_jugadores_actual()
 	for child in lista_vbox.get_children():
+		if child.has_method("get_data"):
+			var data = child.get_data()
+			if data["nombre"].strip_edges() != "":
+				GameData.guardar_jugador_actual(data["id"], data["nombre"], data["imagen"])
 		child.queue_free()
 
+	# 2. Crear la nueva lista
 	for i in range(cantidad):
 		var jugador = jugador_scene.instantiate()
 		lista_vbox.add_child(jugador)
-		# Ahora que el nodo ya está en el árbol, podemos inicializar el nombre
 		jugador.set_default_name(i)
+
+		# 3. Si ya había datos guardados, restaurarlos
+		var anterior = GameData.obtener_jugador_actual(i)
+		if anterior.size() > 0:
+			if anterior.has("nombre") and anterior["nombre"].strip_edges() != "":
+				jugador.nombre_edit.text = anterior["nombre"]
+			if anterior.has("imagen") and anterior["imagen"] != null:
+				jugador.avatar_btn.texture_normal = anterior["imagen"]
