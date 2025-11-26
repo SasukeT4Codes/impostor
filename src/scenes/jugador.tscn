@@ -1,14 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c83dm7uewlthw"]
+[gd_scene load_steps=4 format=3 uid="uid://c83dm7uewlthw"]
 
 [ext_resource type="Texture2D" uid="uid://dcov2e4mc5du4" path="res://src/assets/characters/char-01.png" id="1_5qn08"]
 [ext_resource type="Script" uid="uid://dfo3p6ragjrkn" path="res://src/scripts/Jugador.gd" id="1_ux24j"]
 [ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="2_ux24j"]
-[ext_resource type="Texture2D" uid="uid://bd4yc0o5xl72r" path="res://src/assets/characters/char-02.png" id="3_f5ul8"]
-[ext_resource type="Texture2D" uid="uid://d0fdfu8nh4wyf" path="res://src/assets/characters/char-03.png" id="4_1srhp"]
-[ext_resource type="Texture2D" uid="uid://qqgv2rrjwyya" path="res://src/assets/characters/char-04.png" id="5_45smq"]
-[ext_resource type="Texture2D" uid="uid://n2xb6y1uspce" path="res://src/assets/characters/char-05.png" id="6_42iff"]
-[ext_resource type="Texture2D" uid="uid://0hc1kqgm22b" path="res://src/assets/characters/char-06.png" id="7_jqyao"]
-[ext_resource type="Texture2D" uid="uid://diu2njmtd1p6a" path="res://src/assets/characters/char-07.png" id="8_v8t1y"]
 
 [node name="Jugador" type="VBoxContainer"]
 script = ExtResource("1_ux24j")
@@ -27,17 +21,9 @@ custom_minimum_size = Vector2(600, 128)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ux24j")
 theme_override_font_sizes/font_size = 64
-placeholder_text = "Jugador 1"
+placeholder_text = "Jugador X"
 
 [node name="PerfilX" type="ItemList" parent="."]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
-item_count = 7
 max_columns = 5
-item_0/icon = ExtResource("1_5qn08")
-item_1/icon = ExtResource("3_f5ul8")
-item_2/icon = ExtResource("4_1srhp")
-item_3/icon = ExtResource("5_45smq")
-item_4/icon = ExtResource("6_42iff")
-item_5/icon = ExtResource("7_jqyao")
-item_6/icon = ExtResource("8_v8t1y")
