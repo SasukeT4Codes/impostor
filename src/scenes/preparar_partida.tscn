@@ -1,24 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://beabylmykptfi"]
+[gd_scene load_steps=18 format=3 uid="uid://bygsf5g7ec6c6"]
 
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_7ok1f"]
-[ext_resource type="Script" uid="uid://cgf0cd860kd3i" path="res://src/scripts/PrepararPartida.gd" id="1_485t4"]
 [ext_resource type="FontFile" uid="uid://deh26sxetdow1" path="res://src/assets/fonts/MotionControl-Title.otf" id="2_gt3rl"]
 [ext_resource type="Texture2D" uid="uid://blt54qryonjkw" path="res://src/resources/Atlas/Menu.tres" id="3_uy0ma"]
 [ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="4_nwdqu"]
 [ext_resource type="Texture2D" uid="uid://cnyqx8kkiq3tj" path="res://src/assets/ui/BotonNormal.png" id="5_taqak"]
+[ext_resource type="Texture2D" uid="uid://0g2nwweng4sm" path="res://src/assets/ui/Checked.png" id="5_uy0ma"]
+[ext_resource type="Texture2D" uid="uid://bndb46nlo0u3q" path="res://src/assets/ui/Unchecked.png" id="6_nwdqu"]
 [ext_resource type="Texture2D" uid="uid://cleqi5c2xdlo2" path="res://src/assets/ui/BotonPressed.png" id="6_p0ppv"]
-[ext_resource type="PackedScene" uid="uid://c83dm7uewlthw" path="res://src/scenes/jugador.tscn" id="6_uy0ma"]
 [ext_resource type="Texture2D" uid="uid://b0bhshgitawwe" path="res://src/assets/ui/BotonHover.png" id="7_b70hs"]
 [ext_resource type="Texture2D" uid="uid://mbexp1exudu6" path="res://src/assets/ui/BotonHoverPressed.png" id="8_tbua8"]
 [ext_resource type="Texture2D" uid="uid://dyp6he657lj1b" path="res://src/assets/ui/BotonFocus.png" id="9_485t4"]
-
-[sub_resource type="Theme" id="Theme_xt27n"]
-default_font = ExtResource("4_nwdqu")
-default_font_size = 64
-
-[sub_resource type="Theme" id="Theme_485t4"]
-default_font = ExtResource("4_nwdqu")
-default_font_size = 64
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0ma"]
 bg_color = Color(0.73, 0.5694, 0.5694, 0.48235294)
@@ -50,7 +42,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_485t4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -120,37 +111,29 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="JugadoresHBox" type="HBoxContainer" parent="MenuVBox/Menu/ContenedorVBox"]
+[node name="PistaHBox" type="HBoxContainer" parent="MenuVBox/Menu/ContenedorVBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="Jugadores" type="Label" parent="MenuVBox/Menu/ContenedorVBox/JugadoresHBox"]
+[node name="Pista" type="Label" parent="MenuVBox/Menu/ContenedorVBox/PistaHBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_nwdqu")
 theme_override_font_sizes/font_size = 64
-text = "Cantidad de Jugadores : "
+text = "¿Pista para el impostor? :     "
 
-[node name="CantJug" type="OptionButton" parent="MenuVBox/Menu/ContenedorVBox/JugadoresHBox"]
-layout_mode = 2
-theme = SubResource("Theme_xt27n")
-theme_override_fonts/font = ExtResource("4_nwdqu")
-theme_override_font_sizes/font_size = 64
-
-[node name="ImpostoresHBox" type="HBoxContainer" parent="MenuVBox/Menu/ContenedorVBox"]
-layout_mode = 2
-alignment = 1
-
-[node name="Impostores" type="Label" parent="MenuVBox/Menu/ContenedorVBox/ImpostoresHBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_nwdqu")
-theme_override_font_sizes/font_size = 64
-text = "Cantidad de Impostores : "
-
-[node name="CantImp" type="OptionButton" parent="MenuVBox/Menu/ContenedorVBox/ImpostoresHBox"]
-layout_mode = 2
-theme = SubResource("Theme_485t4")
-theme_override_fonts/font = ExtResource("4_nwdqu")
-theme_override_font_sizes/font_size = 64
+[node name="PistaButton" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PistaHBox/Pista"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -24.0
+offset_right = -34.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(2, 2)
 
 [node name="PanelFondo" type="Panel" parent="MenuVBox/Menu/ContenedorVBox"]
 custom_minimum_size = Vector2(800, 800)
@@ -171,19 +154,106 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="ScrollJugadores" type="ScrollContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen"]
+[node name="ScrollCategorias" type="ScrollContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen"]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 
-[node name="ListaVBox" type="VBoxContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores"]
-custom_minimum_size = Vector2(0, 700)
+[node name="ListaVBox" type="VBoxContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias"]
+custom_minimum_size = Vector2(700, 700)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 alignment = 1
 
-[node name="Jugador" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox" instance=ExtResource("6_uy0ma")]
+[node name="Option1" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
 layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Comida típica"
+
+[node name="Option2" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Profesiones y oficios"
+
+[node name="Option3" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Animales"
+
+[node name="Option4" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Musica"
+
+[node name="Option5" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Lugares y ciudades"
+
+[node name="Option6" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Tecnología"
+
+[node name="Option7" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Películas"
+
+[node name="Option8" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Celebridades"
+
+[node name="Option9" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Herramientas y cosas"
+
+[node name="Option10" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 52
+theme_override_icons/checked = ExtResource("5_uy0ma")
+theme_override_icons/unchecked = ExtResource("6_nwdqu")
+button_pressed = true
+text = "Deportes y Ejercicio"
 
 [node name="Continuar" type="Button" parent="MenuVBox/Menu/ContenedorVBox"]
 custom_minimum_size = Vector2(560, 170)

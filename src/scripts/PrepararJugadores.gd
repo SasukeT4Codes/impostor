@@ -59,3 +59,9 @@ func _generar_jugadores(cantidad:int):
 				jugador.nombre_edit.text = anterior["nombre"]
 			if anterior.has("imagen") and anterior["imagen"] != null:
 				jugador.avatar_btn.texture_normal = anterior["imagen"]
+
+
+
+func _on_continuar_pressed() -> void:
+	
+	get_tree().change_scene_to_file("res://src/scenes/preparar_partida.tscn")

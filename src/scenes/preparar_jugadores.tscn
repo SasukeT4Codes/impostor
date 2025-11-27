@@ -1,0 +1,209 @@
+[gd_scene load_steps=20 format=3 uid="uid://beabylmykptfi"]
+
+[ext_resource type="Script" uid="uid://cgf0cd860kd3i" path="res://src/scripts/PrepararJugadores.gd" id="1_cghxb"]
+[ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="2_xfb8k"]
+[ext_resource type="FontFile" uid="uid://deh26sxetdow1" path="res://src/assets/fonts/MotionControl-Title.otf" id="3_0idh1"]
+[ext_resource type="Texture2D" uid="uid://blt54qryonjkw" path="res://src/resources/Atlas/Menu.tres" id="4_ola8q"]
+[ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="5_co125"]
+[ext_resource type="PackedScene" uid="uid://c83dm7uewlthw" path="res://src/scenes/jugador.tscn" id="6_0cn0g"]
+[ext_resource type="Texture2D" uid="uid://cnyqx8kkiq3tj" path="res://src/assets/ui/BotonNormal.png" id="7_r7tso"]
+[ext_resource type="Texture2D" uid="uid://cleqi5c2xdlo2" path="res://src/assets/ui/BotonPressed.png" id="8_n4cfb"]
+[ext_resource type="Texture2D" uid="uid://b0bhshgitawwe" path="res://src/assets/ui/BotonHover.png" id="9_lnjfq"]
+[ext_resource type="Texture2D" uid="uid://mbexp1exudu6" path="res://src/assets/ui/BotonHoverPressed.png" id="10_xx0hq"]
+[ext_resource type="Texture2D" uid="uid://dyp6he657lj1b" path="res://src/assets/ui/BotonFocus.png" id="11_eas6j"]
+
+[sub_resource type="Theme" id="Theme_xt27n"]
+default_font = ExtResource("5_co125")
+default_font_size = 64
+
+[sub_resource type="Theme" id="Theme_485t4"]
+default_font = ExtResource("5_co125")
+default_font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0ma"]
+bg_color = Color(0.73, 0.5694, 0.5694, 0.48235294)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4nqo0"]
+content_margin_bottom = 32.0
+texture = ExtResource("7_r7tso")
+region_rect = Rect2(0, 0, 56, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijqjh"]
+content_margin_top = 28.0
+texture = ExtResource("8_n4cfb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x17ry"]
+content_margin_bottom = 32.0
+texture = ExtResource("9_lnjfq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijy02"]
+content_margin_top = 28.0
+texture = ExtResource("10_xx0hq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dx4i"]
+texture = ExtResource("11_eas6j")
+
+[node name="PrepararJugadores" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cghxb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96862745, 0.6156863, 0.39607844, 1)
+
+[node name="MenuVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -758.0
+offset_right = 460.0
+offset_bottom = 758.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Titulo" type="NinePatchRect" parent="MenuVBox"]
+custom_minimum_size = Vector2(140, 220)
+layout_mode = 2
+texture = ExtResource("2_xfb8k")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Label" type="Label" parent="MenuVBox/Titulo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("3_0idh1")
+theme_override_font_sizes/font_size = 96
+text = "Preparando Jugadores"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Menu" type="NinePatchRect" parent="MenuVBox"]
+custom_minimum_size = Vector2(0, 1280)
+layout_mode = 2
+texture = ExtResource("4_ola8q")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="ContenedorVBox" type="VBoxContainer" parent="MenuVBox/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="JugadoresHBox" type="HBoxContainer" parent="MenuVBox/Menu/ContenedorVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Jugadores" type="Label" parent="MenuVBox/Menu/ContenedorVBox/JugadoresHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_co125")
+theme_override_font_sizes/font_size = 64
+text = "Cantidad de Jugadores : "
+
+[node name="CantJug" type="OptionButton" parent="MenuVBox/Menu/ContenedorVBox/JugadoresHBox"]
+layout_mode = 2
+theme = SubResource("Theme_xt27n")
+theme_override_fonts/font = ExtResource("5_co125")
+theme_override_font_sizes/font_size = 64
+
+[node name="ImpostoresHBox" type="HBoxContainer" parent="MenuVBox/Menu/ContenedorVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Impostores" type="Label" parent="MenuVBox/Menu/ContenedorVBox/ImpostoresHBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_co125")
+theme_override_font_sizes/font_size = 64
+text = "Cantidad de Impostores : "
+
+[node name="CantImp" type="OptionButton" parent="MenuVBox/Menu/ContenedorVBox/ImpostoresHBox"]
+layout_mode = 2
+theme = SubResource("Theme_485t4")
+theme_override_fonts/font = ExtResource("5_co125")
+theme_override_font_sizes/font_size = 64
+
+[node name="PanelFondo" type="Panel" parent="MenuVBox/Menu/ContenedorVBox"]
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_uy0ma")
+
+[node name="Magen" type="MarginContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ScrollJugadores" type="ScrollContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="ListaVBox" type="VBoxContainer" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+
+[node name="Jugador" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox" instance=ExtResource("6_0cn0g")]
+layout_mode = 2
+
+[node name="Continuar" type="Button" parent="MenuVBox/Menu/ContenedorVBox"]
+custom_minimum_size = Vector2(560, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("5_co125")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxTexture_4nqo0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ijqjh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x17ry")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ijy02")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4dx4i")
+text = "CONTINUAR"
+
+[connection signal="pressed" from="MenuVBox/Menu/ContenedorVBox/Continuar" to="." method="_on_continuar_pressed"]

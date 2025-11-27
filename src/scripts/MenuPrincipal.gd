@@ -8,7 +8,7 @@ func _ready():
 	salir_btn.pressed.connect(_on_salir_pressed)
 
 func _on_jugar_pressed():
-	get_tree().change_scene_to_file("res://src/scenes/preparar_partida.tscn")
+	get_tree().change_scene_to_file("res://src/scenes/preparar_jugadores.tscn")
 
 func _on_salir_pressed():
 	get_tree().quit()
