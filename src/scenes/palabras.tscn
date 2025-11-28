@@ -116,9 +116,15 @@ alignment = 1
 [node name="Nombre" type="Label" parent="MenuVBox/Menu/ContenedorVBox"]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.44705883)
+theme_override_colors/font_outline_color = Color(0.9647059, 0.7882353, 0.7882353, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("4_swsyq")
 theme_override_font_sizes/font_size = 96
-text = "JUGADOR : Jugador1"
+text = "JUGADORX"
 horizontal_alignment = 1
 
 [node name="Margen" type="MarginContainer" parent="MenuVBox/Menu/ContenedorVBox"]

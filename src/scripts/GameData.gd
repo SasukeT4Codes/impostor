@@ -9,6 +9,7 @@ var cantidad_impostores: int = 1
 # --- Categorías ---
 var categorias_activas: Array = []   # las seleccionadas en la partida actual
 var categoria_actual: String = ""    # la que se está usando en la ronda
+var pista_activa: bool = false
 
 # --- Gestión de jugadores actuales ---
 func reset_jugadores_actual():
@@ -107,3 +108,10 @@ func set_categoria_actual(nombre:String):
 
 func get_categoria_actual() -> String:
 	return categoria_actual
+
+
+func set_pista_activa(valor: bool):
+	pista_activa = valor
+
+func get_pista_activa() -> bool:
+	return pista_activa

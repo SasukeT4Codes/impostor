@@ -26,20 +26,22 @@ var categorias_texto := {
 @onready var impostor_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Impostor
 @onready var categoria_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Categoria
 @onready var palabra_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/LaPalabra
+@onready var label1 := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Label1
+@onready var label2 := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Label2
 
 # --- Variables de ronda ---
 var categoria_seleccionada: String = ""
 var fila_seleccionada: Array = []
 var jugador_index: int = 0
-var palabra_comun: String = ""   # palabra para jugadores normales
-var palabra_index: int = -1      # índice de la palabra seleccionada
+var palabra_comun: String = ""
+var palabra_index: int = -1
+var pista_impostor: String = ""   # pista única para todos los impostores
 
 func _ready():
 	_reset_estado()
 	revelar_btn.pressed.connect(_on_revelar_pressed)
 	siguiente_btn.pressed.connect(_on_siguiente_pressed)
 
-	# --- Orden correcto ---
 	_seleccionar_categoria_y_fila()
 	_seleccionar_palabra_comun()
 	_asignar_impostores()
@@ -98,39 +100,52 @@ func _asignar_impostores():
 		if not indices.has(idx):
 			indices.append(idx)
 
+	# --- Generar UNA sola pista para todos los impostores ---
+	if fila_seleccionada.size() >= 4 and palabra_index >= 0:
+		var opciones := []
+		for j in range(4):
+			if j != palabra_index:
+				opciones.append(fila_seleccionada[j])
+		pista_impostor = opciones[randi() % opciones.size()]
+		print("Pista única para impostores: %s" % pista_impostor)
+
+	# --- Asignar impostores y darles la misma pista ---
 	for i in range(total_jugadores):
 		var es_imp = indices.has(i)
 		GameData.jugadores_actual[i]["es_impostor"] = es_imp
-		if es_imp and fila_seleccionada.size() >= 4 and palabra_index >= 0:
-			# elegir una palabra distinta de la común
-			var opciones := []
-			for j in range(4):
-				if j != palabra_index:
-					opciones.append(fila_seleccionada[j])
-			var pista = opciones[randi() % opciones.size()]
-			print("Impostor %s recibe pista: %s" % [GameData.jugadores_actual[i]["nombre"], pista])
+		if es_imp:
+			GameData.jugadores_actual[i]["pista"] = pista_impostor
+			print("Impostor %s recibe pista: %s" % [GameData.jugadores_actual[i]["nombre"], pista_impostor])
 
 	print("Impostores asignados en índices:", indices)
 
 # --- Mostrar jugador actual ---
 func _mostrar_jugador(index:int):
 	var jugador = GameData.obtener_jugador_actual(index)
-	if jugador.size() > 0:
-		nombre_label.text = jugador["nombre"]
-		if jugador.has("imagen") and jugador["imagen"] != null:
-			perfil_pic.texture = jugador["imagen"]
+	if jugador.size() == 0:
+		return
 
-		# Mostrar categoría
-		var texto_visible = categorias_texto.get(categoria_seleccionada, categoria_seleccionada)
+	nombre_label.text = jugador["nombre"]
+	if jugador.has("imagen") and jugador["imagen"] != null:
+		perfil_pic.texture = jugador["imagen"]
+
+	var texto_visible = categorias_texto.get(categoria_seleccionada, categoria_seleccionada)
+	var es_impostor = jugador.has("es_impostor") and jugador["es_impostor"]
+	var pista_activa = GameData.get_pista_activa()
+
+	impostor_label.visible = es_impostor
+
+	if es_impostor:
+		label1.text = "La categoría es:"
+		label2.text = "Tu PISTA es:"
+		categoria_label.text = texto_visible if pista_activa else "no sabes"
+		palabra_label.text = jugador.get("pista", "NO HAY PISTA!").to_upper() if pista_activa else "NO HAY PISTA!"
+	else:
+		label1.text = "La categoría es:"
+		label2.text = "Y la PALABRA es:"
 		categoria_label.text = texto_visible
+		palabra_label.text = palabra_comun.to_upper()
 
-		# Mostrar palabra o impostor
-		var es_impostor = jugador.has("es_impostor") and jugador["es_impostor"]
-		impostor_label.visible = es_impostor
-		if es_impostor:
-			palabra_label.text = ""
-		else:
-			palabra_label.text = palabra_comun
 
 # --- Botones ---
 func _on_revelar_pressed():
@@ -153,7 +168,6 @@ func _on_siguiente_pressed():
 		print("Todos los jugadores ya pasaron")
 		# Aquí podrías cambiar de escena a la fase de juego
 
-# --- Estado inicial ---
 func _reset_estado():
 	perfil_pic.visible = true
 	palabra_panel.visible = false

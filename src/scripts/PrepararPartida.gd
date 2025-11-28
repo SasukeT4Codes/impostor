@@ -2,6 +2,8 @@ extends Control
 
 @onready var categoria_botones := $MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox.get_children()
 
+@onready var pista_btn := $MenuVBox/Menu/ContenedorVBox/PistaHBox/Pista/PistaButton
+
 func _ready():
 	for boton in categoria_botones:
 		if boton is CheckButton:
@@ -30,4 +32,7 @@ func _on_continuar_pressed() -> void:
 		if boton is CheckButton and boton.button_pressed:
 			activas.append(boton.name)
 	GameData.guardar_categorias_activas(activas)
+	# Guardar si la pista está activa
+	GameData.set_pista_activa(pista_btn.button_pressed)
+	
 	get_tree().change_scene_to_file("res://src/scenes/palabras.tscn")
