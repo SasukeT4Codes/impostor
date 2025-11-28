@@ -28,6 +28,6 @@ func _on_continuar_pressed() -> void:
 	var activas := []
 	for boton in categoria_botones:
 		if boton is CheckButton and boton.button_pressed:
-			activas.append(boton.text)
+			activas.append(boton.name)
 	GameData.guardar_categorias_activas(activas)
 	get_tree().change_scene_to_file("res://src/scenes/palabras.tscn")

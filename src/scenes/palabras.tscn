@@ -117,7 +117,7 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("4_swsyq")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 96
 text = "JUGADOR : Jugador1"
 horizontal_alignment = 1
 
