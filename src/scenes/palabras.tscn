@@ -130,13 +130,13 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="PerfilPic" type="TextureRect" parent="MenuVBox/Menu/ContenedorVBox/Margen"]
+visible = false
 custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
 texture = ExtResource("5_ym3nd")
 stretch_mode = 5
 
 [node name="Palabra" type="Panel" parent="MenuVBox/Menu/ContenedorVBox/Margen"]
-visible = false
 custom_minimum_size = Vector2(600, 600)
 layout_mode = 2
 size_flags_horizontal = 4

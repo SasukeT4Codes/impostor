@@ -27,20 +27,25 @@ var categorias_texto := {
 @onready var categoria_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Categoria
 @onready var palabra_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/LaPalabra
 
+# --- Variables de ronda ---
 var categoria_seleccionada: String = ""
 var fila_seleccionada: Array = []
 var jugador_index: int = 0
+var palabra_comun: String = ""   # palabra para jugadores normales
+var palabra_index: int = -1      # índice de la palabra seleccionada
 
 func _ready():
 	_reset_estado()
 	revelar_btn.pressed.connect(_on_revelar_pressed)
 	siguiente_btn.pressed.connect(_on_siguiente_pressed)
 
-	# --- Orden corregido ---
+	# --- Orden correcto ---
 	_seleccionar_categoria_y_fila()
+	_seleccionar_palabra_comun()
 	_asignar_impostores()
 	_mostrar_jugador(jugador_index)
 
+# --- Selección de categoría y fila ---
 func _seleccionar_categoria_y_fila():
 	var activas = GameData.obtener_categorias_activas()
 	if activas.is_empty():
@@ -68,6 +73,16 @@ func _seleccionar_categoria_y_fila():
 	else:
 		push_error("No se encontró archivo para la clave interna: %s" % categoria_seleccionada)
 
+# --- Selección de palabra común ---
+func _seleccionar_palabra_comun():
+	if fila_seleccionada.size() >= 4:
+		palabra_index = randi() % 4
+		palabra_comun = str(fila_seleccionada[palabra_index])
+		print("Palabra común seleccionada (índice %d): %s" % [palabra_index, palabra_comun])
+	else:
+		push_error("La fila seleccionada no tiene 4 palabras")
+
+# --- Asignación de impostores ---
 func _asignar_impostores():
 	var total_jugadores = GameData.jugadores_actual.size()
 	if total_jugadores == 0:
@@ -84,10 +99,20 @@ func _asignar_impostores():
 			indices.append(idx)
 
 	for i in range(total_jugadores):
-		GameData.jugadores_actual[i]["es_impostor"] = indices.has(i)
+		var es_imp = indices.has(i)
+		GameData.jugadores_actual[i]["es_impostor"] = es_imp
+		if es_imp and fila_seleccionada.size() >= 4 and palabra_index >= 0:
+			# elegir una palabra distinta de la común
+			var opciones := []
+			for j in range(4):
+				if j != palabra_index:
+					opciones.append(fila_seleccionada[j])
+			var pista = opciones[randi() % opciones.size()]
+			print("Impostor %s recibe pista: %s" % [GameData.jugadores_actual[i]["nombre"], pista])
 
 	print("Impostores asignados en índices:", indices)
 
+# --- Mostrar jugador actual ---
 func _mostrar_jugador(index:int):
 	var jugador = GameData.obtener_jugador_actual(index)
 	if jugador.size() > 0:
@@ -99,16 +124,15 @@ func _mostrar_jugador(index:int):
 		var texto_visible = categorias_texto.get(categoria_seleccionada, categoria_seleccionada)
 		categoria_label.text = texto_visible
 
-		# Mostrar palabra o impostor con protección
+		# Mostrar palabra o impostor
 		var es_impostor = jugador.has("es_impostor") and jugador["es_impostor"]
 		impostor_label.visible = es_impostor
 		if es_impostor:
 			palabra_label.text = ""
-		elif fila_seleccionada.size() > 0:
-			palabra_label.text = str(fila_seleccionada[0])
 		else:
-			palabra_label.text = "(sin palabra)"
+			palabra_label.text = palabra_comun
 
+# --- Botones ---
 func _on_revelar_pressed():
 	if perfil_pic.visible:
 		perfil_pic.visible = false
@@ -129,6 +153,7 @@ func _on_siguiente_pressed():
 		print("Todos los jugadores ya pasaron")
 		# Aquí podrías cambiar de escena a la fase de juego
 
+# --- Estado inicial ---
 func _reset_estado():
 	perfil_pic.visible = true
 	palabra_panel.visible = false
