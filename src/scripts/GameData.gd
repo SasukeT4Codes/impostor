@@ -4,6 +4,7 @@ extends Node
 var jugadores_actual: Array = []   # lo que está en pantalla ahora
 var jugadores_ultima: Array = []   # copia de la última partida válida
 var historial: Array = []          # todas las partidas jugadas
+var cantidad_impostores: int = 1
 
 # --- Categorías ---
 var categorias_activas: Array = []   # las seleccionadas en la partida actual
@@ -31,6 +32,12 @@ func obtener_jugador_actual(player_id:int) -> Dictionary:
 	if player_id < jugadores_actual.size():
 		return jugadores_actual[player_id]
 	return {}
+
+func set_cantidad_impostores(valor:int):
+	cantidad_impostores = valor
+
+func get_cantidad_impostores() -> int:
+	return cantidad_impostores
 
 # --- Última partida ---
 func sincronizar_a_ultima():
