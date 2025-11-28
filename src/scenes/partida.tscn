@@ -1,0 +1,224 @@
+[gd_scene load_steps=18 format=3 uid="uid://dsskjbmhbx4ga"]
+
+[ext_resource type="Script" uid="uid://jdf5h7fufu61" path="res://src/scripts/Partida.gd" id="1_v1g0x"]
+[ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="2_5lkr2"]
+[ext_resource type="FontFile" uid="uid://deh26sxetdow1" path="res://src/assets/fonts/MotionControl-Title.otf" id="3_2r0we"]
+[ext_resource type="Texture2D" uid="uid://blt54qryonjkw" path="res://src/resources/Atlas/Menu.tres" id="4_0ruhj"]
+[ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="5_7sb8d"]
+[ext_resource type="Texture2D" uid="uid://bo46fbxou6m1t" path="res://src/assets/extra/Reloj.png" id="6_v1g0x"]
+[ext_resource type="Texture2D" uid="uid://cnyqx8kkiq3tj" path="res://src/assets/ui/BotonNormal.png" id="7_rrt36"]
+[ext_resource type="Texture2D" uid="uid://cleqi5c2xdlo2" path="res://src/assets/ui/BotonPressed.png" id="8_lj8p4"]
+[ext_resource type="Texture2D" uid="uid://b0bhshgitawwe" path="res://src/assets/ui/BotonHover.png" id="9_xn3vh"]
+[ext_resource type="Texture2D" uid="uid://mbexp1exudu6" path="res://src/assets/ui/BotonHoverPressed.png" id="10_ys13u"]
+[ext_resource type="Texture2D" uid="uid://dyp6he657lj1b" path="res://src/assets/ui/BotonFocus.png" id="11_tbovr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nlgqx"]
+bg_color = Color(0.6627451, 0.4862745, 0.4862745, 0.87058824)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4nqo0"]
+content_margin_bottom = 32.0
+texture = ExtResource("7_rrt36")
+region_rect = Rect2(0, 0, 56, 17)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijqjh"]
+content_margin_top = 28.0
+texture = ExtResource("8_lj8p4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x17ry"]
+content_margin_bottom = 32.0
+texture = ExtResource("9_xn3vh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijy02"]
+content_margin_top = 28.0
+texture = ExtResource("10_ys13u")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dx4i"]
+texture = ExtResource("11_tbovr")
+
+[node name="Partida" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v1g0x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.96862745, 0.6156863, 0.39607844, 1)
+
+[node name="MenuVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -758.0
+offset_right = 460.0
+offset_bottom = 758.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Titulo" type="NinePatchRect" parent="MenuVBox"]
+custom_minimum_size = Vector2(140, 220)
+layout_mode = 2
+texture = ExtResource("2_5lkr2")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="Label" type="Label" parent="MenuVBox/Titulo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("3_2r0we")
+theme_override_font_sizes/font_size = 96
+text = "TIEMPO : "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="MenuVBox/Titulo"]
+
+[node name="Menu" type="NinePatchRect" parent="MenuVBox"]
+custom_minimum_size = Vector2(0, 1280)
+layout_mode = 2
+texture = ExtResource("4_0ruhj")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="ContenedorVBox" type="VBoxContainer" parent="MenuVBox/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Texto" type="Label" parent="MenuVBox/Menu/ContenedorVBox"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0.44705883)
+theme_override_colors/font_outline_color = Color(0.9647059, 0.7882353, 0.7882353, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("5_7sb8d")
+theme_override_font_sizes/font_size = 96
+text = "El impostor era: ...."
+horizontal_alignment = 1
+
+[node name="Margen" type="MarginContainer" parent="MenuVBox/Menu/ContenedorVBox"]
+custom_minimum_size = Vector2(650, 650)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Imagen" type="TextureRect" parent="MenuVBox/Menu/ContenedorVBox/Margen"]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+texture = ExtResource("6_v1g0x")
+stretch_mode = 5
+
+[node name="Impostores" type="Panel" parent="MenuVBox/Menu/ContenedorVBox/Margen"]
+visible = false
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_nlgqx")
+
+[node name="ImpvBox" type="VBoxContainer" parent="MenuVBox/Menu/ContenedorVBox/Margen/Impostores"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -20.0
+offset_right = 61.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="LosImpostores" type="Label" parent="MenuVBox/Menu/ContenedorVBox/Margen/Impostores/ImpvBox"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4117647)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_7sb8d")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Revelar" type="Button" parent="MenuVBox/Menu/ContenedorVBox"]
+custom_minimum_size = Vector2(560, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("5_7sb8d")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxTexture_4nqo0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ijqjh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x17ry")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ijy02")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4dx4i")
+text = "Revelar"
+
+[node name="Siguiente" type="Button" parent="MenuVBox/Menu/ContenedorVBox"]
+visible = false
+custom_minimum_size = Vector2(560, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 0
+theme_override_colors/font_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_focus_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_hover_color = Color(0.73333335, 0.5686275, 0.5686275, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6627451, 0.4862745, 0.4862745, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("5_7sb8d")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxTexture_4nqo0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ijqjh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_x17ry")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ijy02")
+theme_override_styles/focus = SubResource("StyleBoxTexture_4dx4i")
+text = "SIGUIENTE"

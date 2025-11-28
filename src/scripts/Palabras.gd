@@ -167,6 +167,7 @@ func _on_siguiente_pressed():
 	else:
 		print("Todos los jugadores ya pasaron")
 		# Aquí podrías cambiar de escena a la fase de juego
+		get_tree().change_scene_to_file("res://src/scenes/partida.tscn")
 
 func _reset_estado():
 	perfil_pic.visible = true
