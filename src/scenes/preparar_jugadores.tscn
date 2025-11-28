@@ -185,6 +185,14 @@ alignment = 1
 [node name="Jugador" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox" instance=ExtResource("6_0cn0g")]
 layout_mode = 2
 
+[node name="Alerta" type="Label" parent="MenuVBox/Menu/ContenedorVBox"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_co125")
+theme_override_font_sizes/font_size = 48
+text = "Por favor llene todos los nombres"
+horizontal_alignment = 1
+
 [node name="Continuar" type="Button" parent="MenuVBox/Menu/ContenedorVBox"]
 custom_minimum_size = Vector2(560, 170)
 layout_mode = 2

@@ -5,6 +5,10 @@ var jugadores_actual: Array = []   # lo que está en pantalla ahora
 var jugadores_ultima: Array = []   # copia de la última partida válida
 var historial: Array = []          # todas las partidas jugadas
 
+# --- Categorías ---
+var categorias_activas: Array = []   # las seleccionadas en la partida actual
+var categoria_actual: String = ""    # la que se está usando en la ronda
+
 # --- Gestión de jugadores actuales ---
 func reset_jugadores_actual():
 	jugadores_actual.clear()
@@ -79,3 +83,20 @@ func registrar_victoria(player_id:int):
 		if j["id"] == player_id:
 			j["partidas_ganadas"] += 1
 			break
+
+# --- Gestión de categorías ---
+func reset_categorias():
+	categorias_activas.clear()
+	categoria_actual = ""
+
+func guardar_categorias_activas(lista:Array):
+	categorias_activas = lista.duplicate(true)
+
+func obtener_categorias_activas() -> Array:
+	return categorias_activas
+
+func set_categoria_actual(nombre:String):
+	categoria_actual = nombre
+
+func get_categoria_actual() -> String:
+	return categoria_actual

@@ -3,6 +3,7 @@ extends Control
 @onready var cant_jug := $MenuVBox/Menu/ContenedorVBox/JugadoresHBox/CantJug
 @onready var cant_imp := $MenuVBox/Menu/ContenedorVBox/ImpostoresHBox/CantImp
 @onready var lista_vbox := $MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox
+@onready var alerta := $MenuVBox/Menu/ContenedorVBox/Alerta   # nodo de alerta al lado de Continuar
 
 var jugador_scene := preload("res://src/scenes/Jugador.tscn") # ajusta la ruta
 
@@ -16,6 +17,9 @@ func _ready():
 
 	# Generar lista inicial de jugadores
 	_generar_jugadores(3)
+
+	# Estado inicial de alerta
+	alerta.visible = false
 
 func _on_cant_jug_selected(index:int):
 	var jugadores = cant_jug.get_item_text(index).to_int()
@@ -60,8 +64,17 @@ func _generar_jugadores(cantidad:int):
 			if anterior.has("imagen") and anterior["imagen"] != null:
 				jugador.avatar_btn.texture_normal = anterior["imagen"]
 
-
-
 func _on_continuar_pressed() -> void:
+	var todos_con_nombre := true
+	for child in lista_vbox.get_children():
+		if child.has_method("get_data"):
+			var data = child.get_data()
+			if data["nombre"].strip_edges() == "":
+				todos_con_nombre = false
+				break
 	
-	get_tree().change_scene_to_file("res://src/scenes/preparar_partida.tscn")
+	if todos_con_nombre:
+		alerta.visible = false
+		get_tree().change_scene_to_file("res://src/scenes/preparar_partida.tscn")
+	else:
+		alerta.visible = true
