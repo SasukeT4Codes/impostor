@@ -15,11 +15,17 @@ var categorias_texto := {
 	"Option4": "Música"
 }
 
+# --- Referencias a nodos ---
 @onready var perfil_pic := $MenuVBox/Menu/ContenedorVBox/Margen/PerfilPic
 @onready var palabra_panel := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra
 @onready var revelar_btn := $MenuVBox/Menu/ContenedorVBox/Revelar
 @onready var siguiente_btn := $MenuVBox/Menu/ContenedorVBox/Siguiente
 @onready var nombre_label := $MenuVBox/Menu/ContenedorVBox/Nombre
+
+# --- Panel de palabra ---
+@onready var impostor_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Impostor
+@onready var categoria_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/Categoria
+@onready var palabra_label := $MenuVBox/Menu/ContenedorVBox/Margen/Palabra/PalVBox/LaPalabra
 
 var categoria_seleccionada: String = ""
 var fila_seleccionada: Array = []
@@ -30,9 +36,10 @@ func _ready():
 	revelar_btn.pressed.connect(_on_revelar_pressed)
 	siguiente_btn.pressed.connect(_on_siguiente_pressed)
 
-	_mostrar_jugador(jugador_index)
+	# --- Orden corregido ---
 	_seleccionar_categoria_y_fila()
 	_asignar_impostores()
+	_mostrar_jugador(jugador_index)
 
 func _seleccionar_categoria_y_fila():
 	var activas = GameData.obtener_categorias_activas()
@@ -87,6 +94,20 @@ func _mostrar_jugador(index:int):
 		nombre_label.text = jugador["nombre"]
 		if jugador.has("imagen") and jugador["imagen"] != null:
 			perfil_pic.texture = jugador["imagen"]
+
+		# Mostrar categoría
+		var texto_visible = categorias_texto.get(categoria_seleccionada, categoria_seleccionada)
+		categoria_label.text = texto_visible
+
+		# Mostrar palabra o impostor con protección
+		var es_impostor = jugador.has("es_impostor") and jugador["es_impostor"]
+		impostor_label.visible = es_impostor
+		if es_impostor:
+			palabra_label.text = ""
+		elif fila_seleccionada.size() > 0:
+			palabra_label.text = str(fila_seleccionada[0])
+		else:
+			palabra_label.text = "(sin palabra)"
 
 func _on_revelar_pressed():
 	if perfil_pic.visible:
