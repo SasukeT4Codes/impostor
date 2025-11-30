@@ -36,7 +36,7 @@ func _on_timer_tick():
 		_revelar_impostores()
 
 func _actualizar_tiempo_label():
-	var minutos := int(duracion_segundos / 60)   # conversión explícita
+	var minutos: int = int(float(duracion_segundos) / 60)   # conversión explícita
 	var segundos := duracion_segundos % 60
 	var texto := "%02d:%02d" % [minutos, segundos]
 	tiempo_label.text = texto
