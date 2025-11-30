@@ -7,9 +7,9 @@ var historial: Array = []          # todas las partidas jugadas
 var cantidad_impostores: int = 1
 
 # --- Categorías ---
-var categorias_activas: Array = []   # las seleccionadas en la partida actual
+var categorias_activas: Array = ["Option1", "Option2", "Option3", "Option4", "Option5", "Option6", "Option7", "Option8", "Option9", "Option10"]   # las seleccionadas en la partida actual
 var categoria_actual: String = ""    # la que se está usando en la ronda
-var pista_activa: bool = false
+var pista_activa: bool = true
 var palabra_actual: String = ""   # nueva variable
 
 # --- Gestión de jugadores actuales ---
