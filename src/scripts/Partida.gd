@@ -50,11 +50,20 @@ func _revelar_impostores():
 	impostores_vbox.visible = true
 	siguiente_btn.visible = true
 
-	var nombres := []
+	var nombres: Array[String] = []
+
+	# Añadir impostores
 	for jugador in GameData.jugadores_actual:
 		if jugador.has("es_impostor") and jugador["es_impostor"]:
 			nombres.append(jugador["nombre"])
+
+	# Añadir la palabra de la ronda
+	nombres.append("")  # salto de línea
+	nombres.append("La PALABRA era:")
+	nombres.append(GameData.get_palabra_actual().to_upper())
+
 	los_impostores_label.text = "\n".join(nombres)
+
 
 func _on_siguiente():
 	print("Continuar con la siguiente fase")

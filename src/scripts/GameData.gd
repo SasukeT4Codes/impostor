@@ -10,6 +10,7 @@ var cantidad_impostores: int = 1
 var categorias_activas: Array = []   # las seleccionadas en la partida actual
 var categoria_actual: String = ""    # la que se está usando en la ronda
 var pista_activa: bool = false
+var palabra_actual: String = ""   # nueva variable
 
 # --- Gestión de jugadores actuales ---
 func reset_jugadores_actual():
@@ -115,3 +116,11 @@ func set_pista_activa(valor: bool):
 
 func get_pista_activa() -> bool:
 	return pista_activa
+
+
+
+func set_palabra_actual(palabra: String):
+	palabra_actual = palabra
+
+func get_palabra_actual() -> String:
+	return palabra_actual

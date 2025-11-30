@@ -5,14 +5,26 @@ var categorias_archivos := {
 	"Option1": "res://src/data/categorias/Comida_tipica.json",
 	"Option2": "res://src/data/categorias/Profesiones_oficios.json",
 	"Option3": "res://src/data/categorias/Animales.json",
-	"Option4": "res://src/data/categorias/Musica.json"
+	"Option4": "res://src/data/categorias/Musica.json",
+	"Option5": "res://src/data/categorias/Lugares_ciudades.json",
+	"Option6": "res://src/data/categorias/Tecnologia.json",
+	"Option7": "res://src/data/categorias/Peliculas.json",
+	"Option8": "res://src/data/categorias/Celebridades.json",
+	"Option9": "res://src/data/categorias/Herramientas_cosas.json",
+	"Option10": "res://src/data/categorias/Deportes_ejercicio.json"
 }
 
 var categorias_texto := {
 	"Option1": "Comida típica",
 	"Option2": "Profesiones y oficios",
 	"Option3": "Animales",
-	"Option4": "Música"
+	"Option4": "Música",
+	"Option5": "Lugares y ciudades",
+	"Option6": "Tecnología",
+	"Option7": "Películas",
+	"Option8": "Celebridades",
+	"Option9": "Herramientas y cosas",
+	"Option10": "Deportes y ejercicio"
 }
 
 # --- Referencias a nodos ---
@@ -80,6 +92,7 @@ func _seleccionar_palabra_comun():
 	if fila_seleccionada.size() >= 4:
 		palabra_index = randi() % 4
 		palabra_comun = str(fila_seleccionada[palabra_index])
+		GameData.set_palabra_actual(palabra_comun)
 		print("Palabra común seleccionada (índice %d): %s" % [palabra_index, palabra_comun])
 	else:
 		push_error("La fila seleccionada no tiene 4 palabras")
