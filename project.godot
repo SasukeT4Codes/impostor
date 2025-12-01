@@ -24,6 +24,7 @@ boot_splash/minimum_display_time=2000
 
 GameData="*res://src/scripts/GameData.gd"
 MusicaFondo="*res://src/scenes/musica_fondo.tscn"
+Always="*res://src/scripts/Always.gd"
 
 [display]
 

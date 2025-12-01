@@ -7,10 +7,28 @@ var historial: Array = []          # todas las partidas jugadas
 var cantidad_impostores: int = 1
 
 # --- Categorías ---
-var categorias_activas: Array = ["Option1", "Option2", "Option3", "Option4", "Option5", "Option6", "Option7", "Option8", "Option9", "Option10"]   # las seleccionadas en la partida actual
-var categoria_actual: String = ""    # la que se está usando en la ronda
+var categorias_activas: Array = []
+var categoria_actual: String = ""
 var pista_activa: bool = true
-var palabra_actual: String = ""   # nueva variable
+var palabra_actual: String = ""
+
+# --- Stack de escenas ---
+var escena_stack: Array = []
+
+func push_scene(path: String):
+	if get_tree().current_scene != null:
+		escena_stack.append(get_tree().current_scene.scene_file_path)
+	get_tree().change_scene_to_file(path)
+
+func pop_scene():
+	if escena_stack.size() > 0:
+		var last_path = escena_stack.pop_back()
+		get_tree().change_scene_to_file(last_path)
+	else:
+		get_tree().quit()
+
+func clear_stack():
+	escena_stack.clear()
 
 # --- Gestión de jugadores actuales ---
 func reset_jugadores_actual():
@@ -44,34 +62,38 @@ func get_cantidad_impostores() -> int:
 # --- Última partida ---
 func sincronizar_a_ultima():
 	jugadores_ultima = jugadores_actual.duplicate(true)
+	_guardar_ultima()
 
 func obtener_jugador_ultima(player_id:int) -> Dictionary:
 	if player_id < jugadores_ultima.size():
 		return jugadores_ultima[player_id]
 	return {}
 
+func cargar_ultima():
+	var path = "user://data/ultima.json"
+	if FileAccess.file_exists(path):
+		var file = FileAccess.open(path, FileAccess.READ)
+		if file:
+			var data = JSON.parse_string(file.get_as_text())
+			if typeof(data) == TYPE_DICTIONARY and data.has("jugadores_ultima"):
+				jugadores_ultima = data["jugadores_ultima"]
+			file.close()
+
+func _guardar_ultima():
+	var file = FileAccess.open("user://data/ultima.json", FileAccess.WRITE)
+	if file:
+		var data = {"jugadores_ultima": jugadores_ultima}
+		file.store_string(JSON.stringify(data))
+		file.close()
+
 # --- Historial ---
 func guardar_historial():
 	historial.append(jugadores_actual.duplicate(true))
-	_guardar_json()
+	_guardar_historial()
 
 func cargar_historial():
 	var user_path = "user://data/historial.json"
-	var base_path = "res://src/data/historial.json"
-
-	# Si no existe en user://, copiar desde res://
-	if not FileAccess.file_exists(user_path):
-		if FileAccess.file_exists(base_path):
-			var base_file = FileAccess.open(base_path, FileAccess.READ)
-			if base_file:
-				var data = JSON.parse_string(base_file.get_as_text())
-				if typeof(data) == TYPE_DICTIONARY and data.has("historial"):
-					historial = data["historial"]
-				base_file.close()
-				_guardar_json() # guardar copia en user://
-
-	# Si existe en user://, cargarlo
-	else:
+	if FileAccess.file_exists(user_path):
 		var file = FileAccess.open(user_path, FileAccess.READ)
 		if file:
 			var data = JSON.parse_string(file.get_as_text())
@@ -79,7 +101,7 @@ func cargar_historial():
 				historial = data["historial"]
 			file.close()
 
-func _guardar_json():
+func _guardar_historial():
 	var file = FileAccess.open("user://data/historial.json", FileAccess.WRITE)
 	if file:
 		var data = {"historial": historial}
@@ -110,14 +132,11 @@ func set_categoria_actual(nombre:String):
 func get_categoria_actual() -> String:
 	return categoria_actual
 
-
 func set_pista_activa(valor: bool):
 	pista_activa = valor
 
 func get_pista_activa() -> bool:
 	return pista_activa
-
-
 
 func set_palabra_actual(palabra: String):
 	palabra_actual = palabra

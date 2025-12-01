@@ -5,7 +5,7 @@ extends Control
 @onready var lista_vbox := $MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollJugadores/ListaVBox
 @onready var alerta := $MenuVBox/Menu/ContenedorVBox/Alerta   # nodo de alerta al lado de Continuar
 
-var jugador_scene := preload("res://src/scenes/Jugador.tscn") # ajusta la ruta
+var jugador_scene := preload("res://src/scenes/jugador.tscn") # ajusta la ruta
 
 func _ready():
 	# Generar automáticamente las opciones de jugadores (3 a 14)

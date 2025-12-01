@@ -10,6 +10,11 @@ func _ready():
 	perfil_list.item_selected.connect(_on_perfil_selected)
 	nombre_edit.text_changed.connect(_on_nombre_changed)
 
+	# Permitir que el LineEdit no bloquee el scroll
+	nombre_edit.mouse_filter = Control.MOUSE_FILTER_PASS
+	# Conectar Enter para saltar al siguiente jugador
+	nombre_edit.text_submitted.connect(_on_nombre_submitted)
+
 	# Cargar íconos automáticamente desde assets
 	for i in range(1, 8):
 		var path := "res://src/assets/characters/char-%02d.png" % i
@@ -32,6 +37,20 @@ func _on_nombre_changed(new_text: String):
 	if new_text.strip_edges() != "":
 		GameData.guardar_jugador_actual(get_index(), new_text, avatar_btn.texture_normal)
 
+
+func _on_nombre_submitted(_new_text: String):
+	# Guardar antes de pasar al siguiente
+	GameData.guardar_jugador_actual(get_index(), nombre_edit.text, avatar_btn.texture_normal)
+
+	var parent_vbox = get_parent()
+	var index = parent_vbox.get_children().find(self)
+	var next_index = index + 1
+	if next_index < parent_vbox.get_child_count():
+		var next_child = parent_vbox.get_child(next_index)
+		if next_child.has_node("JugadorX/LineEdit"):
+			next_child.get_node("JugadorX/LineEdit").grab_focus()
+
+
 func set_default_name(id: int):
 	# Usar placeholder en vez de texto real
 	nombre_edit.placeholder_text = "Jugador%d" % (id + 1)
@@ -42,3 +61,4 @@ func get_data() -> Dictionary:
 		"nombre": nombre_edit.text,
 		"imagen": avatar_btn.texture_normal
 	}
+	
