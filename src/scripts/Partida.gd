@@ -67,4 +67,4 @@ func _revelar_impostores():
 
 func _on_siguiente():
 	print("Continuar con la siguiente fase")
-	get_tree().change_scene_to_file("res://src/scenes/preparar_partida.tscn")
+	GameData.push_scene("res://src/scenes/preparar_partida.tscn")

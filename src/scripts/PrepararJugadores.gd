@@ -77,6 +77,6 @@ func _on_continuar_pressed() -> void:
 		alerta.visible = false
 		var cantidad_impostores : int = cant_imp.get_item_text(cant_imp.get_selected_id()).to_int()
 		GameData.set_cantidad_impostores(cantidad_impostores)
-		get_tree().change_scene_to_file("res://src/scenes/preparar_partida.tscn")
+		GameData.push_scene("res://src/scenes/preparar_partida.tscn")
 	else:
 		alerta.visible = true

@@ -67,4 +67,4 @@ func _on_continuar_pressed() -> void:
 	GameData.set_pista_activa(pista_btn.button_pressed)
 	
 	# Pasar a la escena de palabras
-	get_tree().change_scene_to_file("res://src/scenes/palabras.tscn")
+	GameData.push_scene("res://src/scenes/palabras.tscn")

@@ -28,3 +28,4 @@ max_length = 18
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 max_columns = 5
+fixed_icon_size = Vector2i(128, 128)
