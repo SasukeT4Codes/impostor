@@ -3,6 +3,7 @@ extends Node
 # --- Datos en memoria ---
 var jugadores_actual: Array = []   # lo que está en pantalla ahora
 var jugadores_ultima: Array = []   # copia de la última partida válida
+var jugadores_cantidad: int = 0    # NUEVO: cantidad de jugadores de la última partida
 var historial: Array = []          # todas las partidas jugadas
 var cantidad_impostores: int = 1
 
@@ -37,10 +38,14 @@ func reset_jugadores_actual():
 func guardar_jugador_actual(player_id:int, nombre:String, imagen:Texture):
 	if nombre.strip_edges() == "":
 		return
+	var ruta_imagen := ""
+	if imagen != null and imagen.resource_path != "":
+		ruta_imagen = imagen.resource_path
+
 	var nuevo = {
 		"id": player_id,
 		"nombre": nombre,
-		"imagen": imagen,
+		"imagen": ruta_imagen,
 		"partidas_ganadas": 0
 	}
 	if player_id < jugadores_actual.size():
@@ -55,6 +60,7 @@ func obtener_jugador_actual(player_id:int) -> Dictionary:
 
 func set_cantidad_impostores(valor:int):
 	cantidad_impostores = valor
+	guardar_estado()
 
 func get_cantidad_impostores() -> int:
 	return cantidad_impostores
@@ -62,29 +68,52 @@ func get_cantidad_impostores() -> int:
 # --- Última partida ---
 func sincronizar_a_ultima():
 	jugadores_ultima = jugadores_actual.duplicate(true)
-	_guardar_ultima()
+	jugadores_cantidad = jugadores_ultima.size()   # guardar cantidad
+	guardar_estado()
 
 func obtener_jugador_ultima(player_id:int) -> Dictionary:
 	if player_id < jugadores_ultima.size():
 		return jugadores_ultima[player_id]
 	return {}
 
-func cargar_ultima():
-	var path = "user://data/ultima.json"
+# --- Estado completo ---
+func guardar_estado():
+	var file = FileAccess.open("user://data/estado.json", FileAccess.WRITE)
+	if file:
+		var data = {
+			"jugadores_ultima": jugadores_ultima,
+			"jugadores_cantidad": jugadores_cantidad,   # NUEVO
+			"categorias_activas": categorias_activas,
+			"categoria_actual": categoria_actual,
+			"pista_activa": pista_activa,
+			"palabra_actual": palabra_actual,
+			"cantidad_impostores": cantidad_impostores
+		}
+		file.store_string(JSON.stringify(data))
+		file.close()
+
+func cargar_estado():
+	var path = "user://data/estado.json"
 	if FileAccess.file_exists(path):
 		var file = FileAccess.open(path, FileAccess.READ)
 		if file:
 			var data = JSON.parse_string(file.get_as_text())
-			if typeof(data) == TYPE_DICTIONARY and data.has("jugadores_ultima"):
-				jugadores_ultima = data["jugadores_ultima"]
+			if typeof(data) == TYPE_DICTIONARY:
+				if data.has("jugadores_ultima"):
+					jugadores_ultima = data["jugadores_ultima"]
+				if data.has("jugadores_cantidad"):
+					jugadores_cantidad = int(data["jugadores_cantidad"])   # NUEVO
+				if data.has("categorias_activas"):
+					categorias_activas = data["categorias_activas"]
+				if data.has("categoria_actual"):
+					categoria_actual = data["categoria_actual"]
+				if data.has("pista_activa"):
+					pista_activa = data["pista_activa"]
+				if data.has("palabra_actual"):
+					palabra_actual = data["palabra_actual"]
+				if data.has("cantidad_impostores"):
+					cantidad_impostores = int(data["cantidad_impostores"])
 			file.close()
-
-func _guardar_ultima():
-	var file = FileAccess.open("user://data/ultima.json", FileAccess.WRITE)
-	if file:
-		var data = {"jugadores_ultima": jugadores_ultima}
-		file.store_string(JSON.stringify(data))
-		file.close()
 
 # --- Historial ---
 func guardar_historial():
@@ -122,24 +151,28 @@ func reset_categorias():
 
 func guardar_categorias_activas(lista:Array):
 	categorias_activas = lista.duplicate(true)
+	guardar_estado()
 
 func obtener_categorias_activas() -> Array:
 	return categorias_activas
 
 func set_categoria_actual(nombre:String):
 	categoria_actual = nombre
+	guardar_estado()
 
 func get_categoria_actual() -> String:
 	return categoria_actual
 
 func set_pista_activa(valor: bool):
 	pista_activa = valor
+	guardar_estado()
 
 func get_pista_activa() -> bool:
 	return pista_activa
 
 func set_palabra_actual(palabra: String):
 	palabra_actual = palabra
+	guardar_estado()
 
 func get_palabra_actual() -> String:
 	return palabra_actual

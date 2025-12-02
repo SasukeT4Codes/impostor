@@ -13,6 +13,7 @@ config_version=5
 config/name="El Impostor"
 config/description="Pequeño juego local sobre el impostor de 3 a 14 jugadores donde van rotando el mismo celular y diciendo palabras similares hasta descurbir al que no tiene la palabra real"
 run/main_scene="uid://cxjod6fhqv3yp"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.9647059, 0.7882353, 0.7882353, 1)
 boot_splash/fullsize=false

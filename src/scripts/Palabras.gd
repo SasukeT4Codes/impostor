@@ -50,6 +50,7 @@ var palabra_index: int = -1
 var pista_impostor: String = ""   # pista única para todos los impostores
 
 func _ready():
+	randomize()
 	_reset_estado()
 	revelar_btn.pressed.connect(_on_revelar_pressed)
 	siguiente_btn.pressed.connect(_on_siguiente_pressed)
@@ -132,6 +133,9 @@ func _asignar_impostores():
 
 	print("Impostores asignados en índices:", indices)
 
+	# --- Guardar estado completo en disco ---
+	GameData.sincronizar_a_ultima()
+
 # --- Mostrar jugador actual ---
 func _mostrar_jugador(index:int):
 	var jugador = GameData.obtener_jugador_actual(index)
@@ -139,8 +143,22 @@ func _mostrar_jugador(index:int):
 		return
 
 	nombre_label.text = jugador["nombre"]
-	if jugador.has("imagen") and jugador["imagen"] != null:
-		perfil_pic.texture = jugador["imagen"]
+
+	# imagen puede ser String (ruta) o Texture
+	if jugador.has("imagen"):
+		var img = jugador["imagen"]
+		if typeof(img) == TYPE_STRING:
+			if img != "":
+				var tex: Texture = load(img)
+				perfil_pic.texture = tex
+			else:
+				perfil_pic.texture = null
+		elif img is Texture:
+			perfil_pic.texture = img
+		else:
+			perfil_pic.texture = null
+	else:
+		perfil_pic.texture = null
 
 	var texto_visible = categorias_texto.get(categoria_seleccionada, categoria_seleccionada)
 	var es_impostor = jugador.has("es_impostor") and jugador["es_impostor"]
@@ -158,7 +176,6 @@ func _mostrar_jugador(index:int):
 		label2.text = "Y la PALABRA es:"
 		categoria_label.text = texto_visible
 		palabra_label.text = palabra_comun.to_upper()
-
 
 # --- Botones ---
 func _on_revelar_pressed():
