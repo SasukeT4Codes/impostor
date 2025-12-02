@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dssbk3cdoiff8"]
+
+[ext_resource type="Script" uid="uid://hjtv4eqxcn0w" path="res://src/scripts/Always.gd" id="1_50sik"]
+
+[node name="Always" type="Node"]
+script = ExtResource("1_50sik")
