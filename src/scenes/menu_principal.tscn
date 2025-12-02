@@ -189,7 +189,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_ptnfq")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6pn3m")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_28222")
 theme_override_styles/focus = SubResource("StyleBoxTexture_ajlxs")
-disabled = true
 text = "Historial"
 
 [node name="Tutorial" type="Button" parent="MenuVBox/Botones/BotonesVBox"]
@@ -234,3 +233,5 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_6pn3m")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_28222")
 theme_override_styles/focus = SubResource("StyleBoxTexture_ajlxs")
 text = "Salir"
+
+[connection signal="pressed" from="MenuVBox/Botones/BotonesVBox/Historial" to="." method="_on_historial_pressed"]

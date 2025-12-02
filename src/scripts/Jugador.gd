@@ -20,7 +20,7 @@ func _ready():
 	nombre_edit.text_submitted.connect(_on_nombre_submitted)
 
 	# Cargar íconos automáticamente desde assets
-	for i in range(1, 8):
+	for i in range(1, 10):
 		var path := "res://src/assets/characters/char-%02d.png" % i
 		var icon: Texture = load(path)
 		if icon:

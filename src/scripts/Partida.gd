@@ -67,4 +67,14 @@ func _revelar_impostores():
 
 func _on_siguiente():
 	print("Continuar con la siguiente fase")
+	GameData.guardar_estado()
 	GameData.push_scene("res://src/scenes/preparar_partida.tscn")
+
+
+func _on_regresar_menu_pressed() -> void:
+	# Guardar estado antes de salir
+	GameData.guardar_estado()
+	print("Estado guardado")
+	# Ir al menú principal
+	GameData.clear_stack()  # opcional: limpiar el stack para que no se acumulen escenas
+	GameData.push_scene("res://src/scenes/menu_principal.tscn")

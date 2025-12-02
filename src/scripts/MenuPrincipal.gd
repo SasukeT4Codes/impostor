@@ -15,3 +15,7 @@ func _on_jugar_pressed():
 
 func _on_salir_pressed():
 	get_tree().quit()
+
+
+func _on_historial_pressed() -> void:
+	GameData.push_scene("res://src/scenes/historial.tscn")

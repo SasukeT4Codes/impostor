@@ -78,19 +78,28 @@ func obtener_jugador_ultima(player_id:int) -> Dictionary:
 
 # --- Estado completo ---
 func guardar_estado():
-	var file = FileAccess.open("user://data/estado.json", FileAccess.WRITE)
-	if file:
-		var data = {
-			"jugadores_ultima": jugadores_ultima,
-			"jugadores_cantidad": jugadores_cantidad,   # NUEVO
-			"categorias_activas": categorias_activas,
-			"categoria_actual": categoria_actual,
-			"pista_activa": pista_activa,
-			"palabra_actual": palabra_actual,
-			"cantidad_impostores": cantidad_impostores
-		}
-		file.store_string(JSON.stringify(data))
-		file.close()
+	var dir := DirAccess.open("user://")
+	if not dir.dir_exists("data"):
+		dir.make_dir("data")  # crea la carpeta si no existe
+
+	var file := FileAccess.open("user://data/estado.json", FileAccess.WRITE)
+	if file == null:
+		print("ERROR: No se pudo abrir estado.json para escritura")
+		return
+
+	var data = {
+		"jugadores_ultima": jugadores_ultima,
+		"jugadores_cantidad": jugadores_cantidad,
+		"categorias_activas": categorias_activas,
+		"categoria_actual": categoria_actual,
+		"pista_activa": pista_activa,
+		"palabra_actual": palabra_actual,
+		"cantidad_impostores": cantidad_impostores
+	}
+	file.store_string(JSON.stringify(data))
+	file.close()
+	print("✅ estado.json guardado correctamente")
+
 
 func cargar_estado():
 	var path = "user://data/estado.json"
