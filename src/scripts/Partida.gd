@@ -8,6 +8,9 @@ extends Control
 @onready var los_impostores_label := $MenuVBox/Menu/ContenedorVBox/Margen/Impostores/ImpvBox/LosImpostores
 @onready var revelar_btn := $MenuVBox/Menu/ContenedorVBox/Revelar
 @onready var siguiente_btn := $MenuVBox/Menu/ContenedorVBox/Siguiente
+@onready var texto_label := $MenuVBox/Menu/ContenedorVBox/Texto
+@onready var ganador_box := $MenuVBox/Menu/ContenedorVBox/Ganador
+@onready var ganador_button := $MenuVBox/Menu/ContenedorVBox/Ganador/GanadorButton
 
 # --- Configuración inicial ---
 var duracion_segundos := 180  # 3 minutos
@@ -26,6 +29,8 @@ func _ready():
 
 	impostores_vbox.visible = false
 	siguiente_btn.visible = false
+	ganador_box.visible = false
+	texto_label.text = "Los impostores eran..."
 
 func _on_timer_tick():
 	duracion_segundos -= 1
@@ -36,7 +41,7 @@ func _on_timer_tick():
 		_revelar_impostores()
 
 func _actualizar_tiempo_label():
-	var minutos: int = int(float(duracion_segundos) / 60)   # conversión explícita
+	var minutos: int = int(float(duracion_segundos) / 60)
 	var segundos := duracion_segundos % 60
 	var texto := "%02d:%02d" % [minutos, segundos]
 	tiempo_label.text = texto
@@ -49,32 +54,32 @@ func _revelar_impostores():
 	imagen.visible = false
 	impostores_vbox.visible = true
 	siguiente_btn.visible = true
+	ganador_box.visible = true
+	texto_label.text = "¿Quién ganó?"
 
 	var nombres: Array[String] = []
 
-	# Añadir impostores
 	for jugador in GameData.jugadores_actual:
 		if jugador.has("es_impostor") and jugador["es_impostor"]:
 			nombres.append(jugador["nombre"])
 
-	# Añadir la palabra de la ronda
-	nombres.append("")  # salto de línea
+	nombres.append("")
 	nombres.append("La PALABRA era:")
 	nombres.append(GameData.get_palabra_actual().to_upper())
 
 	los_impostores_label.text = "\n".join(nombres)
 
-
 func _on_siguiente():
-	print("Continuar con la siguiente fase")
+	var ganador := "jugadores" if ganador_button.button_pressed else "impostores"
 	GameData.guardar_estado()
+	GameData.guardar_historial_partida(ganador)
+	print("✅ Partida guardada en historial como ganada por: " + ganador)
 	GameData.push_scene("res://src/scenes/preparar_partida.tscn")
 
-
 func _on_regresar_menu_pressed() -> void:
-	# Guardar estado antes de salir
 	GameData.guardar_estado()
 	print("Estado guardado")
-	# Ir al menú principal
-	GameData.clear_stack()  # opcional: limpiar el stack para que no se acumulen escenas
+	ganador_box.visible = false
+	texto_label.text = "Los impostores eran..."
+	GameData.clear_stack()
 	GameData.push_scene("res://src/scenes/menu_principal.tscn")

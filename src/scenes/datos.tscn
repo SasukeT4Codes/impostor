@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhg7vs8qhw1mo"]
+
+[ext_resource type="Script" uid="uid://crnx1htpckn10" path="res://src/scripts/Datos.gd" id="1_djw30"]
+[ext_resource type="Texture2D" uid="uid://b55m5qp842wdj" path="res://src/assets/ui/trash-icon.png" id="2_8vr4x"]
+[ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="3_pv8ku"]
+
+[node name="Datos" type="VBoxContainer"]
+custom_minimum_size = Vector2(732, 128)
+script = ExtResource("1_djw30")
+
+[node name="Partida" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Fecha" type="Button" parent="Partida"]
+custom_minimum_size = Vector2(604, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_pv8ku")
+theme_override_font_sizes/font_size = 40
+text = "Data - 31/12/2001 23:59"
+autowrap_mode = 2
+
+[node name="Borrar" type="Button" parent="Partida"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_pv8ku")
+theme_override_font_sizes/font_size = 40
+icon = ExtResource("2_8vr4x")
+expand_icon = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+color = Color(0.27058825, 0.27058825, 0.27058825, 1)
+
+[node name="Margin" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/Margin"]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("3_pv8ku")
+theme_override_fonts/bold_font = ExtResource("3_pv8ku")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "ASDadsdasdasddasdas sdasddaa sdsadasda asdas dasdas das"
+selection_enabled = true

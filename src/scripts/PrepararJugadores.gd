@@ -59,14 +59,10 @@ func _generar_jugadores(cantidad:int):
 
 	# 2) TRUNCAR la lista en memoria si se reduce la cantidad
 	if GameData.jugadores_actual.size() > cantidad:
-		# Mantener solo los primeros "cantidad"
-		var nuevos := []
+		var nuevos: Array = []
 		for i in range(cantidad):
 			nuevos.append(GameData.jugadores_actual[i])
 		GameData.jugadores_actual = nuevos
-	else:
-		# Si aumenta, no creamos entradas vacías en memoria; se llenan al editar
-		pass
 
 	# Actualizar cantidad y persistir
 	GameData.jugadores_cantidad = cantidad
@@ -101,12 +97,15 @@ func _on_continuar_pressed() -> void:
 		alerta.visible = false
 
 		# Actualizar impostores seleccionado
-		var cantidad_impostores : int = cant_imp.get_item_text(cant_imp.get_selected_id()).to_int()
+		var cantidad_impostores: int = cant_imp.get_item_text(cant_imp.get_selected_id()).to_int()
 		GameData.set_cantidad_impostores(cantidad_impostores)
 
 		# Sincronizar última con la lista ya truncada y persistir
 		GameData.sincronizar_a_ultima()
-		GameData.guardar_historial()
+
+		# Guardar historial con ganador por defecto "jugadores"
+		# (en esta fase aún no se elige impostores como ganadores)
+		GameData.guardar_historial_partida("jugadores")
 
 		GameData.push_scene("res://src/scenes/preparar_partida.tscn")
 	else:

@@ -1,44 +1,58 @@
 extends Control
 
-@onready var info_label: RichTextLabel = $MenuVBox/Menu/ContenedorVBox/Margen/Impostores/ImpvBox/Info_Label
+@onready var lista_vbox: VBoxContainer = $MenuVBox/Menu/ContenedorVBox/MargenExt/PanelFondo/MagenInt/Scroll/ListaVBox
 @onready var volver_btn: Button = $MenuVBox/Menu/ContenedorVBox/Volver
+@onready var borrar_todo_btn: Button = $MenuVBox/Menu/ContenedorVBox/BorrarTodo
+@onready var del_confirmar_btn: Button = $MenuVBox/Menu/DelConfirmar
 
-func _ready():
-	# Cargar estado previo desde disco
-	GameData.cargar_estado()
+var datos_scene: PackedScene = preload("res://src/scenes/datos.tscn")
 
-	# Mostrar info de la última partida
-	var texto := "[b]Última partida:[/b]\n"
-	for jugador in GameData.jugadores_ultima:
-		texto += "- " + jugador.get("nombre", "??")
-		if jugador.has("imagen") and jugador["imagen"] != "":
-			texto += " (avatar: " + jugador["imagen"] + ")"
-		if jugador.has("es_impostor") and jugador["es_impostor"]:
-			texto += " [color=red](IMPOSTOR)[/color]"
-		texto += "\n"
-
-	texto += "\n[b]Categoría:[/b] " + GameData.get_categoria_actual()
-	texto += "\n[b]Palabra:[/b] " + GameData.get_palabra_actual()
-	texto += "\n[b]Impostores:[/b] " + str(GameData.get_cantidad_impostores())
-
-	info_label.text = texto
+func _ready() -> void:
+	GameData.cargar_historial()
+	_del_confirmar_visible(false)
+	_mostrar_historial()
 
 	volver_btn.pressed.connect(_on_volver_pressed)
+	borrar_todo_btn.pressed.connect(_on_borrar_todo_pressed)
+	del_confirmar_btn.pressed.connect(_on_del_confirmar_pressed)
 
-func _on_volver_pressed():
+func _mostrar_historial() -> void:
+	# Limpiar lista previa
+	for child in lista_vbox.get_children():
+		child.queue_free()
+
+	if GameData.historial.is_empty():
+		var label := Label.new()
+		label.text = "No hay historial disponible"
+		lista_vbox.add_child(label)
+		return
+
+	# Mostrar desde la más reciente (última en la lista)
+	for i in range(GameData.historial.size() - 1, -1, -1):
+		var partida: Dictionary = GameData.historial[i]
+		var datos := datos_scene.instantiate()
+		lista_vbox.add_child(datos)
+		datos.call_deferred("cargar_partida", partida, i)
+
+
+func _on_volver_pressed() -> void:
+	_del_confirmar_visible(false)
 	GameData.pop_scene()
 
+func _on_borrar_todo_pressed() -> void:
+	_del_confirmar_visible(true)
 
-func _on_borrar_pressed() -> void:
-	# Vaciar historial en memoria
+func _on_del_confirmar_pressed() -> void:
 	GameData.historial.clear()
-	# Guardar archivo vacío
 	var file := FileAccess.open("user://data/historial.json", FileAccess.WRITE)
 	if file:
-		var data = {"historial": GameData.historial}
+		var data: Dictionary = {"historial": []}
 		file.store_string(JSON.stringify(data))
 		file.close()
-		print("✅ Historial borrado")
+		print("✅ Historial borrado completamente")
 
-	# Actualizar label
-	info_label.text = "[i]Historial borrado[/i]"
+	_del_confirmar_visible(false)
+	_mostrar_historial()
+
+func _del_confirmar_visible(valor: bool) -> void:
+	del_confirmar_btn.visible = valor

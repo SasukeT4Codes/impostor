@@ -17,8 +17,8 @@ config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.9647059, 0.7882353, 0.7882353, 1)
 boot_splash/fullsize=false
-boot_splash/image="uid://bm3h52877me8h"
-config/icon="uid://cxe2t2umvhnu7"
+boot_splash/image="uid://bbva73gvnhkog"
+config/icon="uid://dnne5qxbxyp5h"
 boot_splash/minimum_display_time=2000
 
 [autoload]

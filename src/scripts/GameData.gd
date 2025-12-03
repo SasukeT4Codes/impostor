@@ -3,7 +3,7 @@ extends Node
 # --- Datos en memoria ---
 var jugadores_actual: Array = []   # lo que está en pantalla ahora
 var jugadores_ultima: Array = []   # copia de la última partida válida
-var jugadores_cantidad: int = 0    # NUEVO: cantidad de jugadores de la última partida
+var jugadores_cantidad: int = 0    # cantidad de jugadores de la última partida
 var historial: Array = []          # todas las partidas jugadas
 var cantidad_impostores: int = 1
 
@@ -46,7 +46,8 @@ func guardar_jugador_actual(player_id:int, nombre:String, imagen:Texture):
 		"id": player_id,
 		"nombre": nombre,
 		"imagen": ruta_imagen,
-		"partidas_ganadas": 0
+		"partidas_ganadas": 0,
+		"es_impostor": false
 	}
 	if player_id < jugadores_actual.size():
 		jugadores_actual[player_id] = nuevo
@@ -68,7 +69,7 @@ func get_cantidad_impostores() -> int:
 # --- Última partida ---
 func sincronizar_a_ultima():
 	jugadores_ultima = jugadores_actual.duplicate(true)
-	jugadores_cantidad = jugadores_ultima.size()   # guardar cantidad
+	jugadores_cantidad = jugadores_ultima.size()
 	guardar_estado()
 
 func obtener_jugador_ultima(player_id:int) -> Dictionary:
@@ -80,7 +81,7 @@ func obtener_jugador_ultima(player_id:int) -> Dictionary:
 func guardar_estado():
 	var dir := DirAccess.open("user://")
 	if not dir.dir_exists("data"):
-		dir.make_dir("data")  # crea la carpeta si no existe
+		dir.make_dir("data")
 
 	var file := FileAccess.open("user://data/estado.json", FileAccess.WRITE)
 	if file == null:
@@ -100,7 +101,6 @@ func guardar_estado():
 	file.close()
 	print("✅ estado.json guardado correctamente")
 
-
 func cargar_estado():
 	var path = "user://data/estado.json"
 	if FileAccess.file_exists(path):
@@ -111,7 +111,7 @@ func cargar_estado():
 				if data.has("jugadores_ultima"):
 					jugadores_ultima = data["jugadores_ultima"]
 				if data.has("jugadores_cantidad"):
-					jugadores_cantidad = int(data["jugadores_cantidad"])   # NUEVO
+					jugadores_cantidad = int(data["jugadores_cantidad"])
 				if data.has("categorias_activas"):
 					categorias_activas = data["categorias_activas"]
 				if data.has("categoria_actual"):
@@ -124,10 +124,42 @@ func cargar_estado():
 					cantidad_impostores = int(data["cantidad_impostores"])
 			file.close()
 
-# --- Historial ---
-func guardar_historial():
-	historial.append(jugadores_actual.duplicate(true))
-	_guardar_historial()
+# --- Historial detallado ---
+func guardar_historial_partida(ganador:String):
+	var dir := DirAccess.open("user://")
+	if not dir.dir_exists("data"):
+		dir.make_dir("data")
+
+	# Leer historial existente
+	var data := {}
+	var file := FileAccess.open("user://data/historial.json", FileAccess.READ)
+	if file:
+		data = JSON.parse_string(file.get_as_text())
+		file.close()
+
+	if not data or not data.has("historial"):
+		data = {"historial": []}
+
+	# Construir entrada de partida
+	var partida = {
+		"id": data["historial"].size() + 1,
+		"jugadores": jugadores_actual.duplicate(true),
+		"impostores": jugadores_actual.filter(func(j): return j.get("es_impostor", false)).map(func(j): return j["nombre"]),
+		"categoria": get_categoria_actual(),
+		"palabra": get_palabra_actual(),
+		"pista": pista_activa,
+		"fecha": Time.get_datetime_string_from_system(),
+		"ganador": ganador
+	}
+
+	data["historial"].append(partida)
+	historial = data["historial"]
+
+	# Guardar archivo
+	file = FileAccess.open("user://data/historial.json", FileAccess.WRITE)
+	file.store_string(JSON.stringify(data))
+	file.close()
+	print("✅ Partida añadida al historial")
 
 func cargar_historial():
 	var user_path = "user://data/historial.json"
@@ -138,13 +170,6 @@ func cargar_historial():
 			if typeof(data) == TYPE_DICTIONARY and data.has("historial"):
 				historial = data["historial"]
 			file.close()
-
-func _guardar_historial():
-	var file = FileAccess.open("user://data/historial.json", FileAccess.WRITE)
-	if file:
-		var data = {"historial": historial}
-		file.store_string(JSON.stringify(data))
-		file.close()
 
 # --- Registro de victorias ---
 func registrar_victoria(player_id:int):
