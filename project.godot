@@ -21,6 +21,10 @@ boot_splash/image="uid://bbva73gvnhkog"
 config/icon="uid://dnne5qxbxyp5h"
 boot_splash/minimum_display_time=2000
 
+[audio]
+
+buses/default_bus_layout="res://src/sounds/buslayout/default_bus_layout.tres"
+
 [autoload]
 
 GameData="*res://src/scripts/GameData.gd"

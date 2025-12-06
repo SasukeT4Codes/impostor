@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dib27774qxer5"]
 
-[ext_resource type="AudioStream" uid="uid://bkrtydkqi7k4g" path="res://src/sounds/musica-fondo.ogg" id="1_l5k8s"]
+[ext_resource type="AudioStream" uid="uid://bkrtydkqi7k4g" path="res://src/sounds/musica-fondo-01.ogg" id="1_l5k8s"]
 [ext_resource type="Script" uid="uid://dbrlqbhohooja" path="res://src/scripts/MusicaFondo.gd" id="2_x13yj"]
 
 [node name="MusicaFondo" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_l5k8s")
 autoplay = true
+bus = &"Music"
 script = ExtResource("2_x13yj")
