@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c83dm7uewlthw"]
+[gd_scene load_steps=5 format=3 uid="uid://c83dm7uewlthw"]
 
 [ext_resource type="Texture2D" uid="uid://dcov2e4mc5du4" path="res://src/assets/characters/char-01.png" id="1_5qn08"]
 [ext_resource type="Script" uid="uid://dfo3p6ragjrkn" path="res://src/scripts/Jugador.gd" id="1_ux24j"]
 [ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="2_ux24j"]
+[ext_resource type="Script" uid="uid://d31rthfqjqqlf" path="res://src/scripts/JugadorLineEdit.gd" id="4_ptpvi"]
 
 [node name="Jugador" type="VBoxContainer"]
 script = ExtResource("1_ux24j")
@@ -26,6 +27,7 @@ theme_override_fonts/font = ExtResource("2_ux24j")
 theme_override_font_sizes/font_size = 64
 placeholder_text = "Jugador X"
 max_length = 18
+script = ExtResource("4_ptpvi")
 
 [node name="PerfilX" type="ItemList" parent="."]
 custom_minimum_size = Vector2(0, 400)

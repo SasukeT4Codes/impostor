@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bygsf5g7ec6c6"]
+[gd_scene load_steps=28 format=3 uid="uid://bygsf5g7ec6c6"]
 
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_7ok1f"]
 [ext_resource type="Script" uid="uid://c5iw337c7ewn3" path="res://src/scripts/PrepararPartida.gd" id="1_nwdqu"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cleqi5c2xdlo2" path="res://src/assets/ui/BotonPressed.png" id="6_p0ppv"]
 [ext_resource type="Texture2D" uid="uid://b0bhshgitawwe" path="res://src/assets/ui/BotonHover.png" id="7_b70hs"]
 [ext_resource type="Texture2D" uid="uid://cuyp378kqq2gh" path="res://src/assets/ui/LiteChecked.png" id="7_tbua8"]
+[ext_resource type="Script" uid="uid://c08fhhuifjsed" path="res://src/scripts/PartidaScrollCheck.gd" id="8_b70hs"]
 [ext_resource type="Texture2D" uid="uid://mbexp1exudu6" path="res://src/assets/ui/BotonHoverPressed.png" id="8_tbua8"]
 [ext_resource type="Texture2D" uid="uid://dyp6he657lj1b" path="res://src/assets/ui/BotonFocus.png" id="9_485t4"]
 
@@ -192,6 +193,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 alignment = 1
+script = ExtResource("8_b70hs")
 
 [node name="Option1" type="CheckButton" parent="MenuVBox/Menu/ContenedorVBox/PanelFondo/Magen/ScrollCategorias/ListaVBox"]
 layout_mode = 2

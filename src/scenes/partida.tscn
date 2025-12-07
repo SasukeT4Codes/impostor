@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dsskjbmhbx4ga"]
+[gd_scene load_steps=29 format=3 uid="uid://dsskjbmhbx4ga"]
 
 [ext_resource type="Script" uid="uid://jdf5h7fufu61" path="res://src/scripts/Partida.gd" id="1_v1g0x"]
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="2_5lkr2"]
@@ -52,6 +52,18 @@ texture = ExtResource("10_ys13u")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dx4i"]
 texture = ExtResource("11_tbovr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2r0we"]
+content_margin_bottom = 16.0
+texture = ExtResource("7_rrt36")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ruhj"]
+content_margin_bottom = 16.0
+texture = ExtResource("8_lj8p4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xn3vh"]
+content_margin_bottom = 16.0
+texture = ExtResource("9_xn3vh")
 
 [node name="Partida" type="Control"]
 layout_mode = 3
@@ -294,8 +306,13 @@ anchor_right = 1.0
 offset_left = -18.0
 offset_bottom = 31.0
 grow_horizontal = 0
+focus_mode = 0
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_2r0we")
 theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_2r0we")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_0ruhj")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xn3vh")
 text = "X"
 
 [connection signal="pressed" from="RegresarMenu" to="." method="_on_regresar_menu_pressed"]

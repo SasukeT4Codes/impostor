@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bkkw8idpqh735"]
+[gd_scene load_steps=21 format=3 uid="uid://bkkw8idpqh735"]
 
 [ext_resource type="Script" uid="uid://w4a4hxau68b1" path="res://src/scripts/Palabras.gd" id="1_c1u67"]
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_nlgqx"]
@@ -34,6 +34,18 @@ texture = ExtResource("10_nmflb")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dx4i"]
 texture = ExtResource("11_45dnk")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nlgqx"]
+content_margin_bottom = 16.0
+texture = ExtResource("7_54f0t")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c1u67"]
+content_margin_bottom = 16.0
+texture = ExtResource("8_f40s8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ssxi"]
+content_margin_bottom = 16.0
+texture = ExtResource("9_mi6n1")
 
 [node name="Palabras" type="Control"]
 layout_mode = 3
@@ -248,3 +260,23 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_x17ry")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ijy02")
 theme_override_styles/focus = SubResource("StyleBoxTexture_4dx4i")
 text = "SIGUIENTE"
+
+[node name="RegresarMenu" type="Button" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_bottom = 31.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_c1u67")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_nlgqx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_c1u67")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0ssxi")
+text = "X"
+
+[connection signal="pressed" from="RegresarMenu" to="." method="_on_regresar_menu_pressed"]

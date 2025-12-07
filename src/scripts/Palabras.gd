@@ -204,3 +204,10 @@ func _reset_estado():
 	palabra_panel.visible = false
 	revelar_btn.text = "Revelar"
 	siguiente_btn.visible = false
+
+
+
+
+func _on_regresar_menu_pressed() -> void:
+	GameData.clear_stack()
+	GameData.push_scene("res://src/scenes/menu_principal.tscn")
