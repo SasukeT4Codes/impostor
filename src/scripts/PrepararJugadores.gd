@@ -110,3 +110,8 @@ func _on_continuar_pressed() -> void:
 		GameData.push_scene("res://src/scenes/preparar_partida.tscn")
 	else:
 		alerta.visible = true
+
+
+func _on_regresar_menu_pressed() -> void:
+	GameData.clear_stack()
+	GameData.push_scene("res://src/scenes/menu_principal.tscn")

@@ -23,6 +23,7 @@ stretch_mode = 0
 [node name="LineEdit" type="LineEdit" parent="JugadorX"]
 custom_minimum_size = Vector2(600, 128)
 layout_mode = 2
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_ux24j")
 theme_override_font_sizes/font_size = 64
 placeholder_text = "Jugador X"
