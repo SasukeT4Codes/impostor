@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c83dm7uewlthw"]
+[gd_scene load_steps=4 format=3 uid="uid://c83dm7uewlthw"]
 
 [ext_resource type="Texture2D" uid="uid://dcov2e4mc5du4" path="res://src/assets/characters/char-01.png" id="1_5qn08"]
 [ext_resource type="Script" uid="uid://dfo3p6ragjrkn" path="res://src/scripts/Jugador.gd" id="1_ux24j"]
 [ext_resource type="FontFile" uid="uid://do7o2q1y3iu7r" path="res://src/assets/fonts/RimouskiSB-Text.otf" id="2_ux24j"]
-[ext_resource type="Script" uid="uid://d31rthfqjqqlf" path="res://src/scripts/JugadorLineEdit.gd" id="4_ptpvi"]
 
 [node name="Jugador" type="VBoxContainer"]
 script = ExtResource("1_ux24j")
@@ -20,15 +19,38 @@ texture_normal = ExtResource("1_5qn08")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="LineEdit" type="LineEdit" parent="JugadorX"]
+[node name="LineEditWrapper" type="Control" parent="JugadorX"]
 custom_minimum_size = Vector2(600, 128)
 layout_mode = 2
 mouse_filter = 1
+
+[node name="LineEdit" type="LineEdit" parent="JugadorX/LineEditWrapper"]
+custom_minimum_size = Vector2(600, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/caret_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_constants/caret_width = 4
 theme_override_fonts/font = ExtResource("2_ux24j")
 theme_override_font_sizes/font_size = 64
 placeholder_text = "Jugador X"
 max_length = 18
-script = ExtResource("4_ptpvi")
+drag_and_drop_selection_enabled = false
+select_all_on_focus = true
+
+[node name="TBProxy" type="TextureButton" parent="JugadorX/LineEditWrapper"]
+z_index = 140
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 
 [node name="PerfilX" type="ItemList" parent="."]
 custom_minimum_size = Vector2(0, 400)
