@@ -20,6 +20,12 @@ func _ready():
 
 	# Conectar proxy
 	label_proxy.pressed.connect(_on_proxy_pressed)
+	label_proxy.add_to_group("tbproxies")
+
+	# Restaurar proxy cuando el LineEdit pierde foco
+	nombre_edit.focus_exited.connect(func():
+		label_proxy.visible = true
+	)
 
 	# Cargar íconos automáticamente
 	for i in range(1, 10):

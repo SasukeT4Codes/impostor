@@ -67,3 +67,8 @@ func _on_continuar_pressed() -> void:
 	GameData.set_pista_activa(pista_btn.button_pressed)
 
 	GameData.push_scene("res://src/scenes/palabras.tscn")
+
+
+func _on_regresar_menu_pressed() -> void:
+	GameData.clear_stack()
+	GameData.push_scene("res://src/scenes/menu_principal.tscn")

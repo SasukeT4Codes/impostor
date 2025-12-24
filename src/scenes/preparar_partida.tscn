@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bygsf5g7ec6c6"]
+[gd_scene load_steps=31 format=3 uid="uid://bygsf5g7ec6c6"]
 
 [ext_resource type="Texture2D" uid="uid://b7pavle8brn4r" path="res://src/resources/Atlas/Titulo.tres" id="1_7ok1f"]
 [ext_resource type="Script" uid="uid://c5iw337c7ewn3" path="res://src/scripts/PrepararPartida.gd" id="1_nwdqu"]
@@ -54,6 +54,18 @@ texture = ExtResource("8_tbua8")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4dx4i"]
 texture = ExtResource("9_485t4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbua8"]
+content_margin_bottom = 16.0
+texture = ExtResource("5_taqak")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4ii5"]
+content_margin_bottom = 16.0
+texture = ExtResource("6_p0ppv")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ushmb"]
+content_margin_bottom = 16.0
+texture = ExtResource("7_b70hs")
 
 [node name="PrepararPartida" type="Control"]
 layout_mode = 3
@@ -314,4 +326,23 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ijy02")
 theme_override_styles/focus = SubResource("StyleBoxTexture_4dx4i")
 text = "CONTINUAR"
 
+[node name="RegresarMenu" type="Button" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_bottom = 31.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_gt3rl")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_tbua8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y4ii5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ushmb")
+text = "X"
+
 [connection signal="pressed" from="MenuVBox/Menu/ContenedorVBox/Continuar" to="." method="_on_continuar_pressed"]
+[connection signal="pressed" from="RegresarMenu" to="." method="_on_regresar_menu_pressed"]
